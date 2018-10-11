@@ -8,7 +8,7 @@
 </head>
 <body>
   <div class="container">
-    <nav class="mb-4 navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="mb-3 navbar navbar-expand-lg navbar-light bg-light">
       <%= link_to "My Blog!", root_path, class: "navbar-brand" %>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -27,6 +27,12 @@
         <%= link_to 'Add post', new_post_path, class: "ml-auto btn btn-primary" %>
       </div>
     </nav>
+
+    <% if notice %>
+      <div class="alert alert-success" role="alert">
+        <%= notice %>
+      </div>
+    <% end %>
 
     <div class="row">
       <div class="col-sm-10">
