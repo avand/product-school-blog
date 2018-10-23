@@ -6,6 +6,6 @@ class ApplicationController < ActionController::Base
   before_action :authenticate
   
   def authenticate
-    @current_user = User.find 1
+    @current_user = User.where(id: 1).first
   end
 end

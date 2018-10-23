@@ -2,7 +2,7 @@ require 'test_helper'
 
 class PostsControllerTest < ActionController::TestCase
   test "should redirect to show with alert if editing post current user did not author" do
-    user = User.create first_name: 'test'
+    user = User.create id: 1, first_name: 'test'
     post = Post.create user_id: 2, title: 'test'
     
     get :edit, id: post.id
