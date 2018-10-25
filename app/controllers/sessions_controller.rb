@@ -17,13 +17,13 @@ class SessionsController < ApplicationController
         user = User.find_by email: params[:email]
         
         if user.present?
-            session[:current_user_id] = user.id
-            redirect_to root_path, notice: "Welcome back, #{user.first_name}!"
-            #   Match the password
-            #   If password matches
-            #     session[:current_user_id] = user.id
-            #   If not
-            #     render new with error
+            if user.authenticate(params[:password])
+                session[:current_user_id] = user.id
+                redirect_to root_path, notice: "Welcome back, #{user.first_name}!"
+            else
+                flash[:alert] = "Email/password not found"
+                render :new
+            end
         else
             flash[:alert] = "Email/password not found"
             render :new
