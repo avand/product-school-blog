@@ -32,5 +32,7 @@ class SessionsController < ApplicationController
     
     # Logging out
     def destroy
+        session[:current_user_id] = nil
+        redirect_to root_path, notice: "Goodbye for now!"
     end
 end
