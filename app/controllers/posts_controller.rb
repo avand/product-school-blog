@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
     before_action :load_post, only: [:show, :edit, :update, :destroy]
+    before_action :require_author, only: [:edit, :update, :destroy]
 
     def index
         @posts = Post.all
@@ -48,5 +49,11 @@ class PostsController < ApplicationController
 
     def post_params
         params.require(:post).permit(:title, :body)
+    end
+    
+    def require_author
+        if @post.user_id != @current_user.id
+            redirect_to post_path(@post), alert: 'You can only edit your own posts'
+        end
     end
 end
