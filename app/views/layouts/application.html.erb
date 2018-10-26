@@ -69,10 +69,23 @@
         </div>
 
         <script>
-          $.get('/weather', function(forecastHTML) {
-            var weatherContainer = document.getElementById("weather");
-            weatherContainer.innerHTML = forecastHTML;
-          })
+          var roundCoord = function(coord) {
+            return Math.round(coord * 10000) / 10000;
+          };
+          
+          if (navigator && navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+              var coords = position.coords;
+              var lat = roundCoord(coords.latitude);
+              var lng = roundCoord(coords.longitude);
+
+              $.get('/weather', { lat: lat, lng: lng }, function(forecastHTML) {
+                var weatherContainer = document.getElementById("weather");
+                weatherContainer.innerHTML = forecastHTML;
+              })
+            })
+          }
+          
         </script>
       </div>
     </div>
