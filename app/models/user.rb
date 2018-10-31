@@ -6,7 +6,7 @@
 class User < ActiveRecord::Base
   DRIVING_AGE_LIMIT = 16
   
-  has_secure_password
+  has_secure_password validations: false
   
   has_many :posts
   has_many :comments
